@@ -699,99 +699,236 @@ const server = http.createServer((req, res) => {
             </nav>
             
             <!-- Main Content -->
-            <main class="flex-grow bg-light py-6 px-4">
-                <div class="max-w-4xl mx-auto">
-                    <div class="mb-6">
-                        <h2 class="text-2xl font-bold">Welcome back, Sarah!</h2>
-                        <p class="text-gray-600">Check out what's happening in your groups</p>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <!-- Group Card -->
-                        <div class="bg-white rounded-xl card p-5">
-                            <div class="flex items-center mb-4">
-                                <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
-                                    <i class="fas fa-hiking text-blue-600"></i>
+            <main class="flex-grow bg-light">
+                <!-- Discovery Section -->
+                <div id="discoverySection" class="max-w-6xl mx-auto lg:grid lg:grid-cols-3 lg:gap-6 h-full">
+                    <!-- Left Sidebar - Filters & Quick Actions -->
+                    <div class="hidden lg:block bg-white p-6 shadow-sm">
+                        <div class="space-y-6">
+                            <!-- Quick Create -->
+                            <div>
+                                <h3 class="font-semibold mb-3">Quick Actions</h3>
+                                <button id="createGroupBtn" class="btn-primary w-full py-3 px-4 font-semibold text-white rounded-lg mb-3">
+                                    <i class="fas fa-plus mr-2"></i> Create Group
+                                </button>
+                                <button id="createEventBtn" class="btn-secondary w-full py-3 px-4 font-semibold rounded-lg">
+                                    <i class="fas fa-calendar-plus mr-2"></i> Create Event
+                                </button>
+                            </div>
+
+                            <!-- Filters -->
+                            <div>
+                                <h3 class="font-semibold mb-3">Filters</h3>
+
+                                <!-- Interest Filter -->
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Interests</label>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="chip cursor-pointer text-xs" data-filter="hiking">
+                                            <i class="fas fa-hiking mr-1"></i> Hiking
+                                        </span>
+                                        <span class="chip cursor-pointer text-xs" data-filter="cooking">
+                                            <i class="fas fa-utensils mr-1"></i> Cooking
+                                        </span>
+                                        <span class="chip cursor-pointer text-xs" data-filter="reading">
+                                            <i class="fas fa-book mr-1"></i> Reading
+                                        </span>
+                                        <span class="chip cursor-pointer text-xs" data-filter="music">
+                                            <i class="fas fa-music mr-1"></i> Music
+                                        </span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 class="font-bold">Bay Area Hikers</h3>
-                                    <p class="text-sm text-gray-500">24 members • 3 events this week</p>
+
+                                <!-- Distance Filter -->
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Distance</label>
+                                    <select id="distanceFilter" class="w-full p-2 border border-muted rounded-lg text-sm">
+                                        <option value="">Any distance</option>
+                                        <option value="5">Within 5 km</option>
+                                        <option value="10">Within 10 km</option>
+                                        <option value="25">Within 25 km</option>
+                                        <option value="50">Within 50 km</option>
+                                    </select>
+                                </div>
+
+                                <!-- Time Filter -->
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">When</label>
+                                    <select id="timeFilter" class="w-full p-2 border border-muted rounded-lg text-sm">
+                                        <option value="">Anytime</option>
+                                        <option value="today">Today</option>
+                                        <option value="week">This week</option>
+                                        <option value="month">This month</option>
+                                        <option value="weekend">Weekends</option>
+                                    </select>
                                 </div>
                             </div>
-                            
-                            <p class="text-gray-600 mb-4">Join us this Saturday for a morning hike at Mission Peak!</p>
-                            
-                            <div class="flex justify-between items-center">
-                                <div class="flex -space-x-2">
-                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-8 h-8 rounded-full border-2 border-white">
-                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full border-2 border-white">
-                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-8 h-8 rounded-full border-2 border-white">
-                                    <div class="w-8 h-8 rounded-full bg-light border-2 border-white flex items-center justify-center text-xs text-gray-500">+21</div>
+
+                            <!-- My Groups -->
+                            <div>
+                                <h3 class="font-semibold mb-3">My Groups</h3>
+                                <div class="space-y-2">
+                                    <div class="flex items-center p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                        <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
+                                            <i class="fas fa-hiking text-blue-600 text-xs"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">Bay Area Hikers</p>
+                                            <p class="text-xs text-gray-500">3 new messages</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                        <div class="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center mr-3">
+                                            <i class="fas fa-utensils text-green-600 text-xs"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">SF Foodies</p>
+                                            <p class="text-xs text-gray-500">Event tomorrow</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <button class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold">
-                                    Join
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Center Content - Feed/Map -->
+                    <div class="lg:col-span-2 p-4 lg:p-6">
+                        <!-- Header with View Toggle -->
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-2xl font-bold">Discover Groups & Events</h2>
+                                <p class="text-gray-600">Find activities near you in San Francisco, CA</p>
+                            </div>
+
+                            <!-- View Toggle -->
+                            <div class="bg-white rounded-lg p-1 border border-muted">
+                                <button id="feedViewBtn" class="view-toggle active px-3 py-2 rounded-md text-sm font-medium">
+                                    <i class="fas fa-list mr-1"></i> Feed
+                                </button>
+                                <button id="mapViewBtn" class="view-toggle px-3 py-2 rounded-md text-sm font-medium">
+                                    <i class="fas fa-map mr-1"></i> Map
                                 </button>
                             </div>
                         </div>
-                        
-                        <!-- Group Card -->
-                        <div class="bg-white rounded-xl card p-5">
-                            <div class="flex items-center mb-4">
-                                <div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center mr-3">
-                                    <i class="fas fa-utensils text-green-600"></i>
+
+                        <!-- Feed View -->
+                        <div id="feedView" class="space-y-4">
+                            <!-- Group Card -->
+                            <div class="group-card bg-white rounded-xl card p-6 cursor-pointer hover:shadow-lg transition-shadow" data-group-id="1">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex items-center">
+                                        <div class="w-16 h-16 rounded-xl bg-blue-100 flex items-center justify-center mr-4">
+                                            <i class="fas fa-hiking text-blue-600 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold">Bay Area Hikers</h3>
+                                            <p class="text-gray-500">24 members • 2.3 km away</p>
+                                            <div class="flex items-center mt-1">
+                                                <span class="availability-chip">Weekends</span>
+                                                <span class="availability-chip ml-2">Evenings</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold">
+                                        Join Group
+                                    </button>
                                 </div>
-                                <div>
-                                    <h3 class="font-bold">SF Foodies</h3>
-                                    <p class="text-sm text-gray-500">45 members • New event tomorrow</p>
+
+                                <p class="text-gray-700 mb-4">Explore beautiful hiking trails around the Bay Area. All skill levels welcome! We organize weekly hikes to discover hidden gems and enjoy nature together.</p>
+
+                                <!-- Upcoming Event -->
+                                <div class="bg-light rounded-lg p-4 mb-4">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-semibold text-primary">Next Event: Mission Peak Hike</h4>
+                                            <p class="text-sm text-gray-600">Saturday, 8:00 AM • Mission Peak Regional Preserve</p>
+                                        </div>
+                                        <button class="btn-secondary px-3 py-1 text-sm rounded-lg">
+                                            Join Event
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex -space-x-2">
+                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-8 h-8 rounded-full border-2 border-white">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full border-2 border-white">
+                                        <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-8 h-8 rounded-full border-2 border-white">
+                                        <div class="w-8 h-8 rounded-full bg-light border-2 border-white flex items-center justify-center text-xs text-gray-500">+21</div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="text-gray-400 hover:text-primary transition-colors">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-primary transition-colors">
+                                            <i class="fas fa-share"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <p class="text-gray-600 mb-4">Italian cooking class this Wednesday at 7 PM. Limited spots!</p>
-                            
-                            <div class="flex justify-between items-center">
-                                <div class="flex -space-x-2">
-                                    <img src="https://randomuser.me/api/portraits/men/22.jpg" class="w-8 h-8 rounded-full border-2 border-white">
-                                    <img src="https://randomuser.me/api/portraits/women/65.jpg" class="w-8 h-8 rounded-full border-2 border-white">
-                                    <img src="https://randomuser.me/api/portraits/men/41.jpg" class="w-8 h-8 rounded-full border-2 border-white">
-                                    <div class="w-8 h-8 rounded-full bg-light border-2 border-white flex items-center justify-center text-xs text-gray-500">+42</div>
+
+                            <!-- Event Card -->
+                            <div class="group-card bg-white rounded-xl card p-6 border-l-4 border-accent">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex items-center">
+                                        <div class="w-16 h-16 rounded-xl bg-green-100 flex items-center justify-center mr-4">
+                                            <i class="fas fa-utensils text-green-600 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold">Italian Cooking Masterclass</h3>
+                                            <p class="text-gray-500">Hosted by SF Foodies • 1.8 km away</p>
+                                            <div class="flex items-center mt-1">
+                                                <span class="availability-chip">Wednesday 7 PM</span>
+                                                <span class="text-orange-600 font-medium ml-2 text-sm">4 spots left</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold">
+                                        Join Event
+                                    </button>
                                 </div>
-                                <button class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold">
-                                    Join
+
+                                <p class="text-gray-700 mb-4">Learn to make authentic Italian pasta and sauces from scratch with Chef Marco. Includes wine pairing and a complete dinner. All ingredients provided!</p>
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <span class="text-sm text-gray-600">
+                                            <i class="fas fa-calendar mr-1"></i> Tomorrow 7:00 PM
+                                        </span>
+                                        <span class="text-sm text-gray-600">
+                                            <i class="fas fa-dollar-sign mr-1"></i> $85 per person
+                                        </span>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="text-gray-400 hover:text-primary transition-colors">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-primary transition-colors">
+                                            <i class="fas fa-share"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Load More -->
+                            <div class="text-center py-6">
+                                <button class="btn-secondary px-6 py-3 rounded-lg font-semibold">
+                                    Load More Groups
                                 </button>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="mt-8">
-                        <h3 class="text-xl font-semibold mb-4">Suggested Groups</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div class="bg-white rounded-lg p-4 text-center card">
-                                <div class="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center mx-auto mb-3">
-                                    <i class="fas fa-book text-purple-600"></i>
+
+                        <!-- Map View -->
+                        <div id="mapView" class="hidden">
+                            <div class="bg-white rounded-xl card p-4 h-96 flex items-center justify-center">
+                                <div class="text-center">
+                                    <i class="fas fa-map-marked-alt text-gray-300 text-6xl mb-4"></i>
+                                    <h3 class="text-xl font-semibold text-gray-600 mb-2">Interactive Map</h3>
+                                    <p class="text-gray-500">See groups and events on the map</p>
+                                    <button class="btn-primary mt-4 px-4 py-2 rounded-lg">
+                                        Load Map View
+                                    </button>
                                 </div>
-                                <h4 class="font-medium">Book Club</h4>
-                                <p class="text-xs text-gray-500 mt-1">12 members</p>
-                            </div>
-                            <div class="bg-white rounded-lg p-4 text-center card">
-                                <div class="w-12 h-12 rounded-lg bg-yellow-100 flex items-center justify-center mx-auto mb-3">
-                                    <i class="fas fa-bicycle text-yellow-600"></i>
-                                </div>
-                                <h4 class="font-medium">Cyclists</h4>
-                                <p class="text-xs text-gray-500 mt-1">18 members</p>
-                            </div>
-                            <div class="bg-white rounded-lg p-4 text-center card">
-                                <div class="w-12 h-12 rounded-lg bg-red-100 flex items-center justify-center mx-auto mb-3">
-                                    <i class="fas fa-music text-red-600"></i>
-                                </div>
-                                <h4 class="font-medium">Music Lovers</h4>
-                                <p class="text-xs text-gray-500 mt-1">32 members</p>
-                            </div>
-                            <div class="bg-white rounded-lg p-4 text-center card">
-                                <div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center mx-auto mb-3">
-                                    <i class="fas fa-seedling text-green-600"></i>
-                                </div>
-                                <h4 class="font-medium">Gardeners</h4>
-                                <p class="text-xs text-gray-500 mt-1">15 members</p>
                             </div>
                         </div>
                     </div>
