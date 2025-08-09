@@ -950,6 +950,8 @@ const server = http.createServer((req, res) => {
             
             <!-- Main Content -->
             <main class="flex-grow bg-light">
+                <!-- Home/Discovery Section -->
+                <div id="homeContent" class="tab-content">
                 <!-- Discovery Section -->
                 <div id="discoverySection" class="max-w-6xl mx-auto lg:grid lg:grid-cols-3 lg:gap-6 h-full">
                     <!-- Left Sidebar - Filters & Quick Actions -->
