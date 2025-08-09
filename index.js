@@ -2701,6 +2701,11 @@ const server = http.createServer((req, res) => {
 
             // Initialize slots
             renderSlots();
+
+            // Initialize main app if it exists
+            if (document.getElementById('mainApp')) {
+                initializeMainApp();
+            }
         });
     </script>
 </body>
