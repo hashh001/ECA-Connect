@@ -928,22 +928,22 @@ const server = http.createServer((req, res) => {
             <nav class="bg-white border-t border-muted">
                 <div class="max-w-6xl mx-auto">
                     <div class="flex justify-around">
-                        <a href="#" class="tab-active py-4 px-2 text-center flex flex-col items-center">
+                        <button id="homeTab" class="app-tab tab-active py-4 px-2 text-center flex flex-col items-center">
                             <i class="fas fa-home text-xl mb-1"></i>
                             <span class="text-xs">Home</span>
-                        </a>
-                        <a href="#" class="py-4 px-2 text-center flex flex-col items-center text-gray-500">
+                        </button>
+                        <button id="createTab" class="app-tab py-4 px-2 text-center flex flex-col items-center text-gray-500">
                             <i class="fas fa-plus-circle text-xl mb-1"></i>
                             <span class="text-xs">Create</span>
-                        </a>
-                        <a href="#" class="py-4 px-2 text-center flex flex-col items-center text-gray-500">
+                        </button>
+                        <button id="messagesTab" class="app-tab py-4 px-2 text-center flex flex-col items-center text-gray-500">
                             <i class="fas fa-comments text-xl mb-1"></i>
                             <span class="text-xs">Messages</span>
-                        </a>
-                        <a href="#" class="py-4 px-2 text-center flex flex-col items-center text-gray-500">
+                        </button>
+                        <button id="profileTab" class="app-tab py-4 px-2 text-center flex flex-col items-center text-gray-500">
                             <i class="fas fa-user text-xl mb-1"></i>
                             <span class="text-xs">Profile</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </nav>
