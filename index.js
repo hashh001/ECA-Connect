@@ -2012,6 +2012,7 @@ const server = http.createServer((req, res) => {
             emailVerification: document.getElementById('emailVerification'),
             login: document.getElementById('login'),
             profileSetup: document.getElementById('profileSetup'),
+            mainApp: document.getElementById('mainApp'),
             appShell: document.getElementById('appShell'),
             helloApi: document.getElementById('helloApi')
         };
