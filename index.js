@@ -2494,6 +2494,199 @@ const server = http.createServer((req, res) => {
             document.getElementById('createGroupModal').classList.remove('hidden');
         });
 
+        // Main App Shell Functionality
+
+        // Navigation Management
+        const mainNavItems = ['home', 'create', 'messages', 'profile'];
+
+        function switchMainNav(activeNav) {
+            mainNavItems.forEach(nav => {
+                const navBtn = document.getElementById(\`\${nav}NavBtn\`);
+                const content = document.getElementById(\`\${nav}MainContent\`);
+
+                if (nav === activeNav) {
+                    navBtn.classList.add('nav-active');
+                    content.classList.remove('hidden');
+                } else {
+                    navBtn.classList.remove('nav-active');
+                    content.classList.add('hidden');
+                }
+            });
+        }
+
+        // Main Navigation Event Listeners
+        document.getElementById('homeNavBtn').addEventListener('click', () => switchMainNav('home'));
+        document.getElementById('createNavBtn').addEventListener('click', () => switchMainNav('create'));
+        document.getElementById('messagesNavBtn').addEventListener('click', () => switchMainNav('messages'));
+        document.getElementById('profileNavBtn').addEventListener('click', () => switchMainNav('profile'));
+
+        // Header functionality
+        document.getElementById('headerCreateBtn').addEventListener('click', () => {
+            switchMainNav('create');
+        });
+
+        document.getElementById('createGroupMainBtn').addEventListener('click', () => {
+            document.getElementById('createGroupModal').classList.remove('hidden');
+        });
+
+        // Profile dropdown
+        document.getElementById('profileMenuBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const dropdown = document.getElementById('profileDropdownMenu');
+            dropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('profileDropdownMenu');
+            const profileBtn = document.getElementById('profileMenuBtn');
+            if (!dropdown.contains(e.target) && !profileBtn.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // Dev tools link
+        document.getElementById('devToolsLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            showView('helloApi');
+        });
+
+        // Search functionality
+        let searchTimeout;
+        document.getElementById('globalSearch').addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            const query = e.target.value.trim();
+
+            if (query.length > 2) {
+                searchTimeout = setTimeout(() => {
+                    performSearch(query);
+                }, 300);
+            } else {
+                document.getElementById('searchSuggestions').classList.add('hidden');
+            }
+        });
+
+        function performSearch(query) {
+            const suggestions = document.getElementById('searchSuggestions');
+
+            // Mock search results
+            const mockResults = [
+                { type: 'group', name: 'Bay Area Hikers', icon: 'fas fa-hiking', members: 24 },
+                { type: 'event', name: 'Cooking Class Tomorrow', icon: 'fas fa-utensils', time: '7:00 PM' },
+                { type: 'person', name: 'Sarah Johnson', icon: 'fas fa-user', location: 'SF' }
+            ].filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
+
+            if (mockResults.length > 0) {
+                suggestions.innerHTML = mockResults.map(result => \`
+                    <div class="search-suggestion flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-light flex items-center justify-center">
+                            <i class="\${result.icon} text-primary text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-sm">\${result.name}</p>
+                            <p class="text-xs text-gray-500">
+                                \${result.type === 'group' ? \`\${result.members} members\` :
+                                  result.type === 'event' ? result.time : result.location}
+                            </p>
+                        </div>
+                        <span class="text-xs text-gray-400">\${result.type}</span>
+                    </div>
+                \`).join('');
+                suggestions.classList.remove('hidden');
+            } else {
+                suggestions.innerHTML = \`
+                    <div class="search-suggestion text-center text-gray-500">
+                        <p class="text-sm">No results found for "\${query}"</p>
+                    </div>
+                \`;
+                suggestions.classList.remove('hidden');
+            }
+        }
+
+        // Hide search suggestions when clicking outside
+        document.addEventListener('click', (e) => {
+            const searchInput = document.getElementById('globalSearch');
+            const suggestions = document.getElementById('searchSuggestions');
+            if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+                suggestions.classList.add('hidden');
+            }
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.interest-filter-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                chip.classList.toggle('active');
+                const activeFilters = Array.from(document.querySelectorAll('.interest-filter-chip.active'))
+                    .map(chip => chip.getAttribute('data-interest'));
+
+                console.log('Active filters:', activeFilters);
+                if (activeFilters.length > 0) {
+                    showToast(\`Filtering by: \${activeFilters.join(', ')}\`, 'success');
+                } else {
+                    showToast('Showing all groups', 'success');
+                }
+            });
+        });
+
+        // View toggle functionality
+        document.getElementById('feedViewToggle').addEventListener('click', () => {
+            document.getElementById('feedViewToggle').classList.add('view-active');
+            document.getElementById('mapViewToggle').classList.remove('view-active');
+            document.getElementById('feedContainer').classList.remove('hidden');
+            document.getElementById('mapContainer').classList.add('hidden');
+        });
+
+        document.getElementById('mapViewToggle').addEventListener('click', () => {
+            document.getElementById('mapViewToggle').classList.add('view-active');
+            document.getElementById('feedViewToggle').classList.remove('view-active');
+            document.getElementById('mapContainer').classList.remove('hidden');
+            document.getElementById('feedContainer').classList.add('hidden');
+        });
+
+        // Distance filter
+        document.getElementById('distanceSelect').addEventListener('change', (e) => {
+            const distance = e.target.value;
+            if (distance) {
+                showToast(\`Showing groups within \${distance} km\`, 'success');
+            } else {
+                showToast('Showing all distances', 'success');
+            }
+        });
+
+        // Notification functionality
+        document.getElementById('notificationBtn').addEventListener('click', () => {
+            showToast('Notifications feature coming soon!', 'success');
+            // Hide badge after clicking
+            document.getElementById('notificationBadge').classList.add('hidden');
+        });
+
+        // API Status in sidebar
+        document.getElementById('pingApiBtn').addEventListener('click', () => {
+            const btn = document.getElementById('pingApiBtn');
+            const originalText = btn.innerHTML;
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Pinging...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                showToast('API ping successful: 42ms', 'success');
+            }, 1000);
+        });
+
+        // Initialize main app
+        function initializeMainApp() {
+            // Show notification badges
+            document.getElementById('notificationBadge').classList.remove('hidden');
+            document.getElementById('messagesBadge').classList.remove('hidden');
+
+            // Set initial view
+            switchMainNav('home');
+
+            console.log('Main app initialized');
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             // Set up location
