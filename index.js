@@ -403,6 +403,51 @@ const server = http.createServer((req, res) => {
             </div>
         </div>
         
+        <!-- Add Slot Modal -->
+        <div id="addSlotModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div class="bg-white rounded-xl p-6 max-w-md w-full">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Add Availability Slot</h3>
+                    <button id="closeSlotModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <form id="addSlotForm" class="space-y-4">
+                    <div>
+                        <label for="slotDay" class="block text-sm font-medium text-gray-700 mb-1">Day of the week</label>
+                        <select id="slotDay" class="w-full p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary" required>
+                            <option value="">Select a day</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="slotStartTime" class="block text-sm font-medium text-gray-700 mb-1">Start time</label>
+                            <input type="time" id="slotStartTime" class="w-full p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary" required>
+                        </div>
+                        <div>
+                            <label for="slotEndTime" class="block text-sm font-medium text-gray-700 mb-1">End time</label>
+                            <input type="time" id="slotEndTime" class="w-full p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary" required>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="btn-primary w-full py-3 px-4 font-semibold text-white rounded-lg">
+                            Add Slot
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <!-- Forgot Password Modal -->
         <div id="forgotPasswordModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
             <div class="bg-white rounded-xl p-6 max-w-md w-full">
