@@ -435,6 +435,224 @@ const server = http.createServer((req, res) => {
             </div>
         </div>
         
+        <!-- Create Group Modal -->
+        <div id="createGroupModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div class="bg-white rounded-xl p-6 max-w-2xl w-full max-h-screen overflow-y-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold">Create New Group</h3>
+                    <button id="closeCreateGroupModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <form id="createGroupForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2">
+                            <label for="groupTitle" class="block text-sm font-medium text-gray-700 mb-1">Group Name</label>
+                            <input type="text" id="groupTitle" class="w-full p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary" placeholder="e.g., Weekend Hikers" required>
+                        </div>
+
+                        <div>
+                            <label for="groupInterest" class="block text-sm font-medium text-gray-700 mb-1">Primary Interest</label>
+                            <select id="groupInterest" class="w-full p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary" required>
+                                <option value="">Select interest</option>
+                                <option value="hiking">Hiking & Outdoors</option>
+                                <option value="cooking">Cooking & Food</option>
+                                <option value="reading">Books & Reading</option>
+                                <option value="music">Music</option>
+                                <option value="sports">Sports & Fitness</option>
+                                <option value="arts">Arts & Crafts</option>
+                                <option value="technology">Technology</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="groupLocation" class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                            <input type="text" id="groupLocation" class="w-full p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary" placeholder="San Francisco, CA" required>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label for="groupDescription" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                            <textarea id="groupDescription" rows="4" class="w-full p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary" placeholder="Tell people what your group is about..."></textarea>
+                        </div>
+
+                        <div>
+                            <label for="groupMaxMembers" class="block text-sm font-medium text-gray-700 mb-1">Max Members</label>
+                            <input type="number" id="groupMaxMembers" class="w-full p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary" placeholder="50" min="2" max="500">
+                        </div>
+
+                        <div>
+                            <label for="groupPrivacy" class="block text-sm font-medium text-gray-700 mb-1">Privacy</label>
+                            <select id="groupPrivacy" class="w-full p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary">
+                                <option value="public">Public - Anyone can join</option>
+                                <option value="private">Private - Approval required</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t">
+                        <button type="submit" class="btn-primary w-full py-3 px-4 font-semibold text-white rounded-lg">
+                            Create Group
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Group Detail Modal -->
+        <div id="groupDetailModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div class="bg-white rounded-xl max-w-4xl w-full max-h-screen overflow-y-auto">
+                <!-- Group Header -->
+                <div class="relative">
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-32 rounded-t-xl"></div>
+                    <button id="closeGroupDetailModal" class="absolute top-4 right-4 text-white hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                    <div class="absolute -bottom-8 left-6">
+                        <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center shadow-lg">
+                            <i class="fas fa-hiking text-blue-600 text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group Content -->
+                <div class="p-6 pt-12">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Main Content -->
+                        <div class="lg:col-span-2">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h2 class="text-3xl font-bold">Bay Area Hikers</h2>
+                                    <p class="text-gray-600">24 members • 2.3 km away</p>
+                                    <div class="flex items-center mt-2 space-x-2">
+                                        <span class="availability-chip">Weekends</span>
+                                        <span class="availability-chip">Evenings</span>
+                                    </div>
+                                </div>
+                                <button class="btn-primary px-6 py-3 rounded-lg font-semibold">
+                                    Join Group
+                                </button>
+                            </div>
+
+                            <p class="text-gray-700 mb-6 text-lg leading-relaxed">
+                                Explore beautiful hiking trails around the Bay Area. All skill levels welcome!
+                                We organize weekly hikes to discover hidden gems and enjoy nature together.
+                                Our community focuses on safety, fun, and environmental respect.
+                            </p>
+
+                            <!-- Upcoming Events -->
+                            <div class="mb-6">
+                                <h3 class="text-xl font-semibold mb-4">Upcoming Events</h3>
+                                <div class="space-y-4">
+                                    <div class="border border-muted rounded-lg p-4">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h4 class="font-semibold text-lg">Mission Peak Hike</h4>
+                                                <p class="text-gray-600">Saturday, March 23 • 8:00 AM</p>
+                                                <p class="text-gray-700 mt-2">Challenge yourself with this popular Bay Area hike!</p>
+                                            </div>
+                                            <button class="btn-secondary px-4 py-2 rounded-lg">
+                                                Join Event
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Activity -->
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4">Recent Activity</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center space-x-3">
+                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-10 h-10 rounded-full">
+                                        <div>
+                                            <p class="text-sm"><span class="font-medium">Sarah</span> joined the group</p>
+                                            <p class="text-xs text-gray-500">2 hours ago</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-10 h-10 rounded-full">
+                                        <div>
+                                            <p class="text-sm"><span class="font-medium">Mike</span> posted photos from last weekend's hike</p>
+                                            <p class="text-xs text-gray-500">1 day ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar -->
+                        <div class="space-y-6">
+                            <!-- Members -->
+                            <div class="bg-light rounded-lg p-4">
+                                <h3 class="font-semibold mb-3">Members (24)</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center space-x-3">
+                                        <img src="https://randomuser.me/api/portraits/men/12.jpg" class="w-8 h-8 rounded-full">
+                                        <div>
+                                            <p class="text-sm font-medium">Alex Chen</p>
+                                            <p class="text-xs text-gray-500">Organizer</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-8 h-8 rounded-full">
+                                        <div>
+                                            <p class="text-sm font-medium">Sarah Johnson</p>
+                                            <p class="text-xs text-gray-500">Member</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full">
+                                        <div>
+                                            <p class="text-sm font-medium">Mike Davis</p>
+                                            <p class="text-xs text-gray-500">Member</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="text-primary text-sm font-medium mt-3">View all members</button>
+                            </div>
+
+                            <!-- Group Info -->
+                            <div class="bg-light rounded-lg p-4">
+                                <h3 class="font-semibold mb-3">Group Info</h3>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Created</span>
+                                        <span>Jan 2024</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Location</span>
+                                        <span>San Francisco Bay Area</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Privacy</span>
+                                        <span>Public</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Chat Preview -->
+                            <div class="bg-light rounded-lg p-4">
+                                <h3 class="font-semibold mb-3">Group Chat</h3>
+                                <div class="space-y-2">
+                                    <div class="text-sm">
+                                        <span class="font-medium">Alex:</span> Looking forward to this weekend!
+                                    </div>
+                                    <div class="text-sm">
+                                        <span class="font-medium">Sarah:</span> Same here! Weather looks perfect.
+                                    </div>
+                                </div>
+                                <button class="btn-secondary w-full mt-3 py-2 rounded-lg text-sm">
+                                    Open Chat
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Add Slot Modal -->
         <div id="addSlotModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
             <div class="bg-white rounded-xl p-6 max-w-md w-full">
