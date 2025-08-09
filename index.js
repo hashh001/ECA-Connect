@@ -1586,6 +1586,115 @@ const server = http.createServer((req, res) => {
             }
         });
 
+        // Discovery Features
+
+        // View Toggle
+        document.getElementById('feedViewBtn').addEventListener('click', () => {
+            document.getElementById('feedViewBtn').classList.add('active');
+            document.getElementById('mapViewBtn').classList.remove('active');
+            document.getElementById('feedView').classList.remove('hidden');
+            document.getElementById('mapView').classList.add('hidden');
+        });
+
+        document.getElementById('mapViewBtn').addEventListener('click', () => {
+            document.getElementById('mapViewBtn').classList.add('active');
+            document.getElementById('feedViewBtn').classList.remove('active');
+            document.getElementById('mapView').classList.remove('hidden');
+            document.getElementById('feedView').classList.add('hidden');
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.chip[data-filter]').forEach(chip => {
+            chip.addEventListener('click', () => {
+                chip.classList.toggle('selected');
+                // Apply filter logic here
+                const selectedFilters = Array.from(document.querySelectorAll('.chip[data-filter].selected'))
+                    .map(chip => chip.getAttribute('data-filter'));
+                console.log('Active filters:', selectedFilters);
+                showToast(\`Filter updated: \${selectedFilters.join(', ') || 'All'}\`, 'success');
+            });
+        });
+
+        // Distance and time filters
+        document.getElementById('distanceFilter').addEventListener('change', (e) => {
+            const distance = e.target.value;
+            console.log('Distance filter:', distance);
+            if (distance) {
+                showToast(\`Showing groups within \${distance} km\`, 'success');
+            }
+        });
+
+        document.getElementById('timeFilter').addEventListener('change', (e) => {
+            const time = e.target.value;
+            console.log('Time filter:', time);
+            if (time) {
+                showToast(\`Showing events: \${time}\`, 'success');
+            }
+        });
+
+        // Create Group Modal
+        document.getElementById('createGroupBtn').addEventListener('click', () => {
+            document.getElementById('createGroupModal').classList.remove('hidden');
+        });
+
+        document.getElementById('closeCreateGroupModal').addEventListener('click', () => {
+            document.getElementById('createGroupModal').classList.add('hidden');
+            document.getElementById('createGroupForm').reset();
+        });
+
+        document.getElementById('createGroupModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('createGroupModal')) {
+                document.getElementById('createGroupModal').classList.add('hidden');
+                document.getElementById('createGroupForm').reset();
+            }
+        });
+
+        // Create Group Form
+        document.getElementById('createGroupForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = {
+                title: document.getElementById('groupTitle').value,
+                interest: document.getElementById('groupInterest').value,
+                location: document.getElementById('groupLocation').value,
+                description: document.getElementById('groupDescription').value,
+                maxMembers: document.getElementById('groupMaxMembers').value,
+                privacy: document.getElementById('groupPrivacy').value
+            };
+
+            console.log('Creating group:', formData);
+
+            // Close modal and show success
+            document.getElementById('createGroupModal').classList.add('hidden');
+            document.getElementById('createGroupForm').reset();
+            showToast('Group created successfully! Pending approval.', 'success');
+        });
+
+        // Group Detail Modal
+        document.querySelectorAll('.group-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Don't open modal if clicking on buttons
+                if (e.target.closest('button')) return;
+
+                document.getElementById('groupDetailModal').classList.remove('hidden');
+            });
+        });
+
+        document.getElementById('closeGroupDetailModal').addEventListener('click', () => {
+            document.getElementById('groupDetailModal').classList.add('hidden');
+        });
+
+        document.getElementById('groupDetailModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('groupDetailModal')) {
+                document.getElementById('groupDetailModal').classList.add('hidden');
+            }
+        });
+
+        // Create Event Button (placeholder)
+        document.getElementById('createEventBtn').addEventListener('click', () => {
+            showToast('Create Event feature coming soon!', 'success');
+        });
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             // Set up location
