@@ -230,6 +230,155 @@ const server = http.createServer((req, res) => {
             background-color: var(--primary);
             color: white;
         }
+
+        /* App Shell Styles */
+        .header-sticky {
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .nav-item {
+            color: #6B7280;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            color: var(--primary);
+            background-color: rgba(142, 224, 0, 0.05);
+        }
+
+        .nav-active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background-color: rgba(142, 224, 0, 0.05);
+        }
+
+        .main-content-panel {
+            min-height: calc(100vh - 128px);
+        }
+
+        .group-card {
+            transition: all 0.2s ease;
+        }
+
+        .group-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(15,18,36,0.08);
+        }
+
+        .interest-filter-chip {
+            padding: 6px 12px;
+            border: 1px solid var(--muted);
+            border-radius: 20px;
+            background: white;
+            color: #6B7280;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .interest-filter-chip:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .interest-filter-chip.active {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .view-toggle {
+            color: #6B7280;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .view-active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .action-btn {
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.15s ease;
+        }
+
+        .action-btn:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 14px;
+        }
+
+        /* Search Suggestions */
+        #searchSuggestions {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-suggestion {
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+
+        .search-suggestion:hover {
+            background-color: var(--light);
+        }
+
+        /* Grid System */
+        .grid-cols-12 {
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+        }
+
+        .col-span-8 {
+            grid-column: span 8 / span 8;
+        }
+
+        .col-span-4 {
+            grid-column: span 4 / span 4;
+        }
+
+        @media (min-width: 1280px) {
+            .xl\\:col-span-9 {
+                grid-column: span 9 / span 9;
+            }
+
+            .xl\\:col-span-3 {
+                grid-column: span 3 / span 3;
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 1023px) {
+            .col-span-12 {
+                grid-column: span 12 / span 12;
+            }
+
+            .lg\\:col-span-8,
+            .lg\\:col-span-4 {
+                grid-column: span 12 / span 12;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        .nav-item:focus,
+        .interest-filter-chip:focus,
+        .view-toggle:focus,
+        .action-btn:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
