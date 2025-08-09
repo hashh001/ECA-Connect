@@ -886,6 +886,429 @@ const server = http.createServer((req, res) => {
             </div>
         </div>
         
+        <!-- Main App Shell - Comprehensive Structure -->
+        <div id="mainApp" class="hidden flex flex-col min-h-screen">
+            <!-- Sticky Header -->
+            <header class="header-sticky bg-white shadow-sm border-b border-muted z-40" style="height: 64px;">
+                <div class="max-w-7xl mx-auto px-4 lg:px-6 h-full flex items-center justify-between">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                            <i class="fas fa-users text-white text-lg"></i>
+                        </div>
+                        <div class="hidden sm:block">
+                            <h1 class="text-xl font-bold text-neutral">ECA Connect</h1>
+                        </div>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="flex-1 max-w-2xl mx-4 lg:mx-8">
+                        <div class="relative">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input
+                                type="text"
+                                id="globalSearch"
+                                placeholder="Search groups, events, or people..."
+                                class="w-full pl-10 pr-4 py-2.5 border border-muted rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-light"
+                            >
+                            <div id="searchSuggestions" class="hidden absolute top-full left-0 right-0 bg-white border border-muted rounded-lg mt-1 shadow-lg z-50">
+                                <!-- Search suggestions will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Header Actions -->
+                    <div class="flex items-center space-x-2 lg:space-x-4">
+                        <!-- Create Button -->
+                        <button id="headerCreateBtn" class="btn-primary px-4 py-2 rounded-lg font-semibold text-sm">
+                            <i class="fas fa-plus mr-2"></i>
+                            <span class="hidden sm:inline">Create</span>
+                        </button>
+
+                        <!-- Notifications -->
+                        <button id="notificationBtn" class="relative p-2 text-gray-500 hover:text-neutral transition-colors">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span id="notificationBadge" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                        </button>
+
+                        <!-- Profile Avatar -->
+                        <div class="relative">
+                            <button id="profileMenuBtn" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors">
+                                <i class="fas fa-user text-primary"></i>
+                            </button>
+                            <div id="profileDropdownMenu" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-muted py-2 z-50">
+                                <div class="px-4 py-3 border-b border-muted">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                                            <i class="fas fa-user text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold">Sarah Johnson</p>
+                                            <p class="text-sm text-gray-600">sarah@example.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="py-2">
+                                    <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-50">My Profile</a>
+                                    <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-50">Settings</a>
+                                    <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-50">My Groups</a>
+                                    <a href="#" id="devToolsLink" class="block px-4 py-2 text-sm hover:bg-gray-50">Dev Tools</a>
+                                </div>
+                                <div class="border-t border-muted py-2">
+                                    <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-50">Sign Out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Primary Navigation -->
+            <nav class="bg-white border-b border-muted sticky top-16 z-30">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex">
+                        <button id="homeNavBtn" class="nav-item nav-active flex items-center px-6 py-4 text-sm font-medium">
+                            <i class="fas fa-home mr-3"></i>
+                            <span>Home</span>
+                        </button>
+                        <button id="createNavBtn" class="nav-item flex items-center px-6 py-4 text-sm font-medium">
+                            <i class="fas fa-plus-circle mr-3"></i>
+                            <span>Create</span>
+                        </button>
+                        <button id="messagesNavBtn" class="nav-item flex items-center px-6 py-4 text-sm font-medium">
+                            <i class="fas fa-comments mr-3"></i>
+                            <span>Messages</span>
+                            <span id="messagesBadge" class="hidden ml-2 bg-red-500 text-white text-xs rounded-full px-2 py-0.5">2</span>
+                        </button>
+                        <button id="profileNavBtn" class="nav-item flex items-center px-6 py-4 text-sm font-medium">
+                            <i class="fas fa-user mr-3"></i>
+                            <span>Profile</span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content Container -->
+            <div class="flex-1 bg-light">
+                <div class="max-w-7xl mx-auto h-full">
+                    <div class="grid grid-cols-12 gap-6 h-full">
+                        <!-- Main Content Area -->
+                        <main class="col-span-12 lg:col-span-8 xl:col-span-9">
+                            <!-- Home Content -->
+                            <div id="homeMainContent" class="main-content-panel p-4 lg:p-6">
+                                <!-- Filter Bar -->
+                                <div class="bg-white rounded-xl shadow-sm border border-muted p-4 mb-6">
+                                    <div class="flex flex-wrap items-center gap-4">
+                                        <div class="flex items-center space-x-2">
+                                            <label class="text-sm font-medium text-gray-700">Interests:</label>
+                                            <div class="flex flex-wrap gap-2">
+                                                <button class="interest-filter-chip" data-interest="hiking">
+                                                    <i class="fas fa-hiking mr-1"></i>
+                                                    Hiking
+                                                </button>
+                                                <button class="interest-filter-chip" data-interest="cooking">
+                                                    <i class="fas fa-utensils mr-1"></i>
+                                                    Cooking
+                                                </button>
+                                                <button class="interest-filter-chip" data-interest="reading">
+                                                    <i class="fas fa-book mr-1"></i>
+                                                    Reading
+                                                </button>
+                                                <button class="interest-filter-chip" data-interest="music">
+                                                    <i class="fas fa-music mr-1"></i>
+                                                    Music
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center space-x-4">
+                                            <select id="distanceSelect" class="px-3 py-2 border border-muted rounded-lg text-sm">
+                                                <option value="">Any distance</option>
+                                                <option value="5">Within 5 km</option>
+                                                <option value="10">Within 10 km</option>
+                                                <option value="25">Within 25 km</option>
+                                            </select>
+
+                                            <div class="flex bg-light rounded-lg p-1">
+                                                <button id="feedViewToggle" class="view-toggle view-active px-3 py-2 rounded-md text-sm font-medium">
+                                                    <i class="fas fa-list mr-1"></i>
+                                                    Feed
+                                                </button>
+                                                <button id="mapViewToggle" class="view-toggle px-3 py-2 rounded-md text-sm font-medium">
+                                                    <i class="fas fa-map mr-1"></i>
+                                                    Map
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Feed View -->
+                                <div id="feedContainer" class="space-y-6">
+                                    <!-- Group Card - Enhanced -->
+                                    <div class="group-card bg-white rounded-xl shadow-sm border border-muted p-6 hover:shadow-md transition-shadow cursor-pointer">
+                                        <div class="flex items-start justify-between mb-4">
+                                            <div class="flex items-start space-x-4">
+                                                <div class="w-16 h-16 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                                                    <i class="fas fa-hiking text-blue-600 text-xl"></i>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <h3 class="text-xl font-bold text-neutral mb-1">Bay Area Hikers</h3>
+                                                    <div class="flex items-center space-x-4 text-sm text-gray-600 mb-2">
+                                                        <span><i class="fas fa-users mr-1"></i>24 members</span>
+                                                        <span><i class="fas fa-map-marker-alt mr-1"></i>2.3 km away</span>
+                                                        <span><i class="fas fa-clock mr-1"></i>Active today</span>
+                                                    </div>
+                                                    <div class="flex flex-wrap gap-2">
+                                                        <span class="availability-chip">Weekends</span>
+                                                        <span class="availability-chip">Evenings</span>
+                                                        <span class="availability-chip">Beginner friendly</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex space-x-2">
+                                                <button class="action-btn text-gray-400 hover:text-red-500">
+                                                    <i class="fas fa-heart"></i>
+                                                </button>
+                                                <button class="action-btn text-gray-400 hover:text-blue-500">
+                                                    <i class="fas fa-share"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-gray-700 mb-4 leading-relaxed">
+                                            Explore beautiful hiking trails around the Bay Area. All skill levels welcome!
+                                            We organize weekly hikes to discover hidden gems and enjoy nature together.
+                                        </p>
+
+                                        <!-- Upcoming Event Preview -->
+                                        <div class="bg-accent/5 border border-accent/20 rounded-lg p-4 mb-4">
+                                            <div class="flex items-center justify-between">
+                                                <div>
+                                                    <h4 class="font-semibold text-accent mb-1">
+                                                        <i class="fas fa-calendar-alt mr-2"></i>
+                                                        Next Event: Mission Peak Hike
+                                                    </h4>
+                                                    <p class="text-sm text-gray-600">Saturday, 8:00 AM • Mission Peak Regional Preserve</p>
+                                                </div>
+                                                <button class="btn-secondary btn-sm">Join Event</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Members and Join -->
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="flex -space-x-2">
+                                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-8 h-8 rounded-full border-2 border-white" alt="Member">
+                                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full border-2 border-white" alt="Member">
+                                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-8 h-8 rounded-full border-2 border-white" alt="Member">
+                                                    <div class="w-8 h-8 rounded-full bg-light border-2 border-white flex items-center justify-center">
+                                                        <span class="text-xs text-gray-500 font-medium">+21</span>
+                                                    </div>
+                                                </div>
+                                                <span class="text-sm text-gray-600">and 21 others</span>
+                                            </div>
+                                            <button class="btn-primary">
+                                                <i class="fas fa-plus mr-2"></i>
+                                                Join Group
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Event Card -->
+                                    <div class="group-card bg-white rounded-xl shadow-sm border border-muted border-l-4 border-l-orange-500 p-6">
+                                        <div class="flex items-start justify-between mb-4">
+                                            <div class="flex items-start space-x-4">
+                                                <div class="w-16 h-16 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0">
+                                                    <i class="fas fa-utensils text-orange-600 text-xl"></i>
+                                                </div>
+                                                <div>
+                                                    <h3 class="text-xl font-bold text-neutral mb-1">Italian Cooking Masterclass</h3>
+                                                    <div class="flex items-center space-x-4 text-sm text-gray-600 mb-2">
+                                                        <span><i class="fas fa-users mr-1"></i>Hosted by SF Foodies</span>
+                                                        <span><i class="fas fa-map-marker-alt mr-1"></i>1.8 km away</span>
+                                                    </div>
+                                                    <div class="flex items-center space-x-2">
+                                                        <span class="availability-chip">Tomorrow 7:00 PM</span>
+                                                        <span class="text-orange-600 font-semibold text-sm">4 spots left</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span class="text-lg font-bold text-accent">$85</span>
+                                        </div>
+
+                                        <p class="text-gray-700 mb-4">
+                                            Learn to make authentic Italian pasta and sauces from scratch with Chef Marco.
+                                            Includes wine pairing and a complete dinner.
+                                        </p>
+
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-4 text-sm text-gray-600">
+                                                <span><i class="fas fa-clock mr-1"></i>3 hours</span>
+                                                <span><i class="fas fa-utensils mr-1"></i>All ingredients included</span>
+                                                <span><i class="fas fa-wine-glass mr-1"></i>Wine pairing</span>
+                                            </div>
+                                            <button class="btn-primary">
+                                                Reserve Spot
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Map View -->
+                                <div id="mapContainer" class="hidden">
+                                    <div class="bg-white rounded-xl shadow-sm border border-muted h-96 flex items-center justify-center">
+                                        <div class="text-center">
+                                            <i class="fas fa-map-marked-alt text-gray-300 text-6xl mb-4"></i>
+                                            <h3 class="text-xl font-semibold text-gray-600 mb-2">Interactive Map</h3>
+                                            <p class="text-gray-500 mb-4">See groups and events on the map</p>
+                                            <button class="btn-primary">
+                                                Load Map View
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Other content panels (hidden by default) -->
+                            <div id="createMainContent" class="main-content-panel hidden p-4 lg:p-6">
+                                <div class="text-center mb-8">
+                                    <h2 class="text-3xl font-bold mb-4">Create Something New</h2>
+                                    <p class="text-gray-600">Start a group or organize an event</p>
+                                </div>
+
+                                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                                    <div class="bg-white rounded-xl card p-8 text-center">
+                                        <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                                            <i class="fas fa-users text-primary text-3xl"></i>
+                                        </div>
+                                        <h3 class="text-2xl font-bold mb-4">Create a Group</h3>
+                                        <p class="text-gray-600 mb-6">Build a community around shared interests and meet regularly</p>
+                                        <button id="createGroupMainBtn" class="btn-primary w-full py-3 rounded-lg font-semibold">
+                                            <i class="fas fa-plus mr-2"></i>
+                                            Create Group
+                                        </button>
+                                    </div>
+
+                                    <div class="bg-white rounded-xl card p-8 text-center">
+                                        <div class="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                                            <i class="fas fa-calendar-plus text-accent text-3xl"></i>
+                                        </div>
+                                        <h3 class="text-2xl font-bold mb-4">Create an Event</h3>
+                                        <p class="text-gray-600 mb-6">Organize a one-time activity or meetup</p>
+                                        <button class="btn-secondary w-full py-3 rounded-lg font-semibold">
+                                            <i class="fas fa-plus mr-2"></i>
+                                            Create Event
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="messagesMainContent" class="main-content-panel hidden">
+                                <!-- Messages content -->
+                                <div class="text-center py-12">
+                                    <i class="fas fa-comments text-gray-300 text-6xl mb-4"></i>
+                                    <h3 class="text-xl font-semibold text-gray-600 mb-2">Messages</h3>
+                                    <p class="text-gray-500">Chat functionality coming soon!</p>
+                                </div>
+                            </div>
+
+                            <div id="profileMainContent" class="main-content-panel hidden">
+                                <!-- Profile content -->
+                                <div class="text-center py-12">
+                                    <i class="fas fa-user text-gray-300 text-6xl mb-4"></i>
+                                    <h3 class="text-xl font-semibold text-gray-600 mb-2">Profile</h3>
+                                    <p class="text-gray-500">Profile management coming soon!</p>
+                                </div>
+                            </div>
+                        </main>
+
+                        <!-- Right Sidebar -->
+                        <aside class="hidden lg:block lg:col-span-4 xl:col-span-3 p-4 lg:p-6">
+                            <div class="sticky top-32 space-y-6">
+                                <!-- Quick Stats -->
+                                <div class="bg-white rounded-xl shadow-sm border border-muted p-6">
+                                    <h3 class="font-semibold mb-4">Your Activity</h3>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="text-center">
+                                            <div class="text-2xl font-bold text-primary">2</div>
+                                            <div class="text-sm text-gray-600">Groups Joined</div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="text-2xl font-bold text-accent">5</div>
+                                            <div class="text-sm text-gray-600">Events Attended</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Upcoming Events -->
+                                <div class="bg-white rounded-xl shadow-sm border border-muted p-6">
+                                    <h3 class="font-semibold mb-4">Upcoming Events</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                                                <i class="fas fa-hiking text-blue-600 text-sm"></i>
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="font-medium text-sm">Mission Peak Hike</p>
+                                                <p class="text-xs text-gray-600">Tomorrow 8:00 AM</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center">
+                                                <i class="fas fa-utensils text-orange-600 text-sm"></i>
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="font-medium text-sm">Cooking Class</p>
+                                                <p class="text-xs text-gray-600">Wed 7:00 PM</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Suggestions -->
+                                <div class="bg-white rounded-xl shadow-sm border border-muted p-6">
+                                    <h3 class="font-semibold mb-4">Suggested for You</h3>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
+                                                <i class="fas fa-book text-purple-600 text-sm"></i>
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="font-medium text-sm">SF Book Club</p>
+                                                <p class="text-xs text-gray-600">12 members</p>
+                                            </div>
+                                            <button class="btn-primary btn-sm">Join</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Hello API -->
+                                <div class="bg-white rounded-xl shadow-sm border border-muted p-6">
+                                    <h3 class="font-semibold mb-4">API Status</h3>
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-sm text-gray-600">Status</span>
+                                        <span class="flex items-center text-sm">
+                                            <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                            Operational
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="text-sm text-gray-600">Last ping</span>
+                                        <span class="text-sm font-medium">42ms</span>
+                                    </div>
+                                    <button id="pingApiBtn" class="btn-secondary w-full py-2 text-sm">
+                                        <i class="fas fa-satellite-dish mr-2"></i>
+                                        Ping API
+                                    </button>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- App Shell -->
         <div id="appShell" class="hidden flex flex-col min-h-screen">
             <!-- Header -->
