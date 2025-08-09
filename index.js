@@ -1042,6 +1042,103 @@ const server = http.createServer((req, res) => {
                 chip.classList.toggle('selected');
             });
         });
+
+        // Slot Management
+        let availabilitySlots = [
+            { day: 'Monday', startTime: '18:00', endTime: '20:00' },
+            { day: 'Saturday', startTime: '10:00', endTime: '14:00' }
+        ];
+
+        function renderSlots() {
+            const slotsContainer = document.getElementById('slotsContainer');
+            const emptySlots = document.getElementById('emptySlots');
+
+            if (availabilitySlots.length === 0) {
+                slotsContainer.classList.add('hidden');
+                emptySlots.classList.remove('hidden');
+            } else {
+                slotsContainer.classList.remove('hidden');
+                emptySlots.classList.add('hidden');
+
+                slotsContainer.innerHTML = '';
+
+                availabilitySlots.forEach((slot, index) => {
+                    const slotDiv = document.createElement('div');
+                    slotDiv.className = 'availability-slot flex items-center justify-between bg-light p-3 rounded-lg';
+                    slotDiv.innerHTML = \`
+                        <div>
+                            <span class="font-medium">\${slot.day}</span>
+                            <span class="text-gray-600 ml-2">\${slot.startTime} - \${slot.endTime}</span>
+                        </div>
+                        <button class="delete-slot text-gray-400 hover:text-gray-600" data-index="\${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    \`;
+                    slotsContainer.appendChild(slotDiv);
+                });
+
+                // Add event listeners for delete buttons
+                document.querySelectorAll('.delete-slot').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const index = parseInt(e.currentTarget.getAttribute('data-index'));
+                        availabilitySlots.splice(index, 1);
+                        renderSlots();
+                        showToast('Availability slot removed', 'success');
+                    });
+                });
+            }
+        }
+
+        // Add Slot Modal
+        document.getElementById('addSlotBtn').addEventListener('click', () => {
+            document.getElementById('addSlotModal').classList.remove('hidden');
+        });
+
+        document.getElementById('closeSlotModal').addEventListener('click', () => {
+            document.getElementById('addSlotModal').classList.add('hidden');
+            document.getElementById('addSlotForm').reset();
+        });
+
+        // Handle slot form submission
+        document.getElementById('addSlotForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const day = document.getElementById('slotDay').value;
+            const startTime = document.getElementById('slotStartTime').value;
+            const endTime = document.getElementById('slotEndTime').value;
+
+            // Validate times
+            if (startTime >= endTime) {
+                showToast('End time must be after start time', 'error');
+                return;
+            }
+
+            // Check for conflicts
+            const conflict = availabilitySlots.find(slot =>
+                slot.day === day && (
+                    (startTime >= slot.startTime && startTime < slot.endTime) ||
+                    (endTime > slot.startTime && endTime <= slot.endTime) ||
+                    (startTime <= slot.startTime && endTime >= slot.endTime)
+                )
+            );
+
+            if (conflict) {
+                showToast('This time slot conflicts with an existing slot', 'error');
+                return;
+            }
+
+            // Add the new slot
+            availabilitySlots.push({ day, startTime, endTime });
+
+            // Sort slots by day order
+            const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            availabilitySlots.sort((a, b) => dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day));
+
+            renderSlots();
+            document.getElementById('addSlotModal').classList.add('hidden');
+            document.getElementById('addSlotForm').reset();
+            showToast('Availability slot added successfully', 'success');
+        });
         
         // Password Strength
         const passwordInput = document.getElementById('password');
