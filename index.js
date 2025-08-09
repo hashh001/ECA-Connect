@@ -1890,6 +1890,38 @@ const server = http.createServer((req, res) => {
             showToast('Create Event feature coming soon!', 'success');
         });
 
+        // Tab Navigation
+        const tabs = ['home', 'create', 'messages', 'profile'];
+
+        function switchTab(activeTab) {
+            // Update tab buttons
+            tabs.forEach(tab => {
+                const tabBtn = document.getElementById(\`\${tab}Tab\`);
+                const content = document.getElementById(\`\${tab}Content\`);
+
+                if (tab === activeTab) {
+                    tabBtn.classList.add('tab-active');
+                    tabBtn.classList.remove('text-gray-500');
+                    content.classList.remove('hidden');
+                } else {
+                    tabBtn.classList.remove('tab-active');
+                    tabBtn.classList.add('text-gray-500');
+                    content.classList.add('hidden');
+                }
+            });
+        }
+
+        // Tab event listeners
+        document.getElementById('homeTab').addEventListener('click', () => switchTab('home'));
+        document.getElementById('createTab').addEventListener('click', () => switchTab('create'));
+        document.getElementById('messagesTab').addEventListener('click', () => switchTab('messages'));
+        document.getElementById('profileTab').addEventListener('click', () => switchTab('profile'));
+
+        // Create group from create tab
+        document.getElementById('createGroupFromTab').addEventListener('click', () => {
+            document.getElementById('createGroupModal').classList.remove('hidden');
+        });
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             // Set up location
