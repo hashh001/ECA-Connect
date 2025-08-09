@@ -2183,7 +2183,7 @@ const server = http.createServer((req, res) => {
         });
         
         document.getElementById('backToApp').addEventListener('click', () => {
-            showView('appShell');
+            showView('mainApp');
         });
         
         document.getElementById('pingApi').addEventListener('click', () => {
