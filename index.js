@@ -1191,6 +1191,14 @@ const server = http.createServer((req, res) => {
             radiusValue.textContent = \`\${radiusSlider.value} km\`;
         });
         
+        // Close modal on outside click
+        document.getElementById('addSlotModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('addSlotModal')) {
+                document.getElementById('addSlotModal').classList.add('hidden');
+                document.getElementById('addSlotForm').reset();
+            }
+        });
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             // Set up location
@@ -1201,6 +1209,9 @@ const server = http.createServer((req, res) => {
                     document.getElementById('currentLocation').textContent = 'Location not available';
                 });
             }
+
+            // Initialize slots
+            renderSlots();
         });
     </script>
 </body>
