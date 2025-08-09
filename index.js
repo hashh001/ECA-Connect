@@ -198,6 +198,38 @@ const server = http.createServer((req, res) => {
             background-color: var(--primary);
             border-radius: 2px;
         }
+
+        .availability-chip {
+            background-color: rgba(142, 224, 0, 0.1);
+            color: var(--accent);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .view-toggle {
+            color: #6B7280;
+            transition: all 0.15s ease;
+        }
+
+        .view-toggle.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .group-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .chip[data-filter] {
+            cursor: pointer;
+        }
+
+        .chip[data-filter].selected {
+            background-color: var(--primary);
+            color: white;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
