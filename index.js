@@ -500,35 +500,40 @@ const server = http.createServer((req, res) => {
                         <h3 class="text-lg font-semibold mb-2">When are you available?</h3>
                         <p class="text-gray-600">Set your weekly availability for meetups</p>
                     </div>
-                    
+
                     <div class="bg-white rounded-xl p-4 card">
                         <div class="flex justify-between items-center mb-4">
                             <h4 class="font-medium">Your availability slots</h4>
-                            <button class="text-primary font-medium flex items-center">
+                            <button id="addSlotBtn" class="text-primary font-medium flex items-center">
                                 <i class="fas fa-plus mr-1"></i> Add Slot
                             </button>
                         </div>
-                        
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between bg-light p-3 rounded-lg">
+
+                        <div id="slotsContainer" class="space-y-3">
+                            <div class="availability-slot flex items-center justify-between bg-light p-3 rounded-lg">
                                 <div>
                                     <span class="font-medium">Monday</span>
-                                    <span class="text-gray-600">18:00 - 20:00</span>
+                                    <span class="text-gray-600 ml-2">18:00 - 20:00</span>
                                 </div>
-                                <button class="text-gray-400 hover:text-gray-600">
+                                <button class="delete-slot text-gray-400 hover:text-gray-600">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
-                            
-                            <div class="flex items-center justify-between bg-light p-3 rounded-lg">
+
+                            <div class="availability-slot flex items-center justify-between bg-light p-3 rounded-lg">
                                 <div>
                                     <span class="font-medium">Saturday</span>
-                                    <span class="text-gray-600">10:00 - 14:00</span>
+                                    <span class="text-gray-600 ml-2">10:00 - 14:00</span>
                                 </div>
-                                <button class="text-gray-400 hover:text-gray-600">
+                                <button class="delete-slot text-gray-400 hover:text-gray-600">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
+                        </div>
+
+                        <div id="emptySlots" class="hidden text-center py-8">
+                            <i class="fas fa-calendar-plus text-gray-300 text-3xl mb-3"></i>
+                            <p class="text-gray-500">No availability slots yet. Add your first slot!</p>
                         </div>
                     </div>
                     
