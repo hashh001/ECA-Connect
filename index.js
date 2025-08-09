@@ -1185,6 +1185,199 @@ const server = http.createServer((req, res) => {
                         </div>
                     </div>
                 </div>
+                </div>
+
+                <!-- Create Tab Content -->
+                <div id="createContent" class="tab-content hidden">
+                    <div class="max-w-4xl mx-auto p-6">
+                        <div class="text-center mb-8">
+                            <h2 class="text-3xl font-bold mb-4">Create Something New</h2>
+                            <p class="text-gray-600">Start a group or organize an event</p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-xl card p-8 text-center">
+                                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-users text-primary text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">Create a Group</h3>
+                                <p class="text-gray-600 mb-6">Build a community around shared interests and meet regularly</p>
+                                <button id="createGroupFromTab" class="btn-primary w-full py-3 rounded-lg font-semibold">
+                                    Create Group
+                                </button>
+                            </div>
+
+                            <div class="bg-white rounded-xl card p-8 text-center">
+                                <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-calendar-plus text-accent text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">Create an Event</h3>
+                                <p class="text-gray-600 mb-6">Organize a one-time activity or meetup</p>
+                                <button class="btn-secondary w-full py-3 rounded-lg font-semibold">
+                                    Create Event
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages Tab Content -->
+                <div id="messagesContent" class="tab-content hidden">
+                    <div class="max-w-6xl mx-auto lg:grid lg:grid-cols-4 lg:gap-6 h-full">
+                        <!-- Conversations List -->
+                        <div class="bg-white lg:col-span-1 border-r border-muted">
+                            <div class="p-4 border-b border-muted">
+                                <h2 class="text-xl font-bold">Messages</h2>
+                            </div>
+                            <div class="divide-y divide-muted">
+                                <div class="p-4 hover:bg-gray-50 cursor-pointer bg-light">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
+                                            <i class="fas fa-hiking text-blue-600"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h3 class="font-semibold">Bay Area Hikers</h3>
+                                            <p class="text-sm text-gray-600 truncate">Alex: Looking forward to this weekend!</p>
+                                        </div>
+                                        <div class="text-xs text-gray-500">2m</div>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 hover:bg-gray-50 cursor-pointer">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center">
+                                            <i class="fas fa-utensils text-green-600"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h3 class="font-semibold">SF Foodies</h3>
+                                            <p class="text-sm text-gray-600 truncate">Sarah: Don't forget to bring aprons!</p>
+                                        </div>
+                                        <div class="text-xs text-gray-500">1h</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Area -->
+                        <div class="lg:col-span-3 flex flex-col">
+                            <div class="bg-white border-b border-muted p-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                                        <i class="fas fa-hiking text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Bay Area Hikers</h3>
+                                        <p class="text-sm text-gray-600">24 members</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex-1 bg-light p-4 space-y-4 overflow-y-auto">
+                                <div class="flex items-start space-x-3">
+                                    <img src="https://randomuser.me/api/portraits/men/12.jpg" class="w-8 h-8 rounded-full">
+                                    <div>
+                                        <div class="bg-white rounded-lg px-3 py-2 max-w-xs">
+                                            <p class="text-sm">Looking forward to this weekend! Weather looks perfect.</p>
+                                        </div>
+                                        <p class="text-xs text-gray-500 mt-1">Alex • 2 minutes ago</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start space-x-3 justify-end">
+                                    <div>
+                                        <div class="bg-primary rounded-lg px-3 py-2 max-w-xs text-white">
+                                            <p class="text-sm">Same here! I'll bring some snacks for the group.</p>
+                                        </div>
+                                        <p class="text-xs text-gray-500 mt-1 text-right">You • 1 minute ago</p>
+                                    </div>
+                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-8 h-8 rounded-full">
+                                </div>
+                            </div>
+
+                            <div class="bg-white border-t border-muted p-4">
+                                <div class="flex space-x-3">
+                                    <input type="text" placeholder="Type a message..." class="flex-1 p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary">
+                                    <button class="btn-primary px-4 py-3 rounded-lg">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Tab Content -->
+                <div id="profileContent" class="tab-content hidden">
+                    <div class="max-w-4xl mx-auto p-6">
+                        <div class="bg-white rounded-xl card p-6 mb-6">
+                            <div class="flex items-center space-x-6 mb-6">
+                                <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl font-bold">Sarah Johnson</h2>
+                                    <p class="text-gray-600">Member since January 2024</p>
+                                    <div class="flex items-center mt-2 space-x-2">
+                                        <span class="availability-chip">Weekends</span>
+                                        <span class="availability-chip">Evenings</span>
+                                    </div>
+                                </div>
+                                <button class="btn-secondary px-4 py-2 rounded-lg">
+                                    Edit Profile
+                                </button>
+                            </div>
+
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div>
+                                    <h3 class="font-semibold mb-3">My Interests</h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="chip selected">Hiking</span>
+                                        <span class="chip selected">Cooking</span>
+                                        <span class="chip selected">Reading</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="font-semibold mb-3">My Groups</h3>
+                                    <div class="space-y-2">
+                                        <div class="text-sm">Bay Area Hikers</div>
+                                        <div class="text-sm">SF Foodies</div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="font-semibold mb-3">Location</h3>
+                                    <p class="text-sm text-gray-600">San Francisco, CA</p>
+                                    <p class="text-sm text-gray-600">5 km radius</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Account Settings -->
+                        <div class="bg-white rounded-xl card p-6">
+                            <h3 class="text-xl font-semibold mb-4">Account Settings</h3>
+                            <div class="space-y-4">
+                                <button class="w-full text-left p-3 rounded-lg hover:bg-gray-50 flex justify-between items-center">
+                                    <span>Notification Preferences</span>
+                                    <i class="fas fa-chevron-right text-gray-400"></i>
+                                </button>
+                                <button class="w-full text-left p-3 rounded-lg hover:bg-gray-50 flex justify-between items-center">
+                                    <span>Privacy Settings</span>
+                                    <i class="fas fa-chevron-right text-gray-400"></i>
+                                </button>
+                                <button class="w-full text-left p-3 rounded-lg hover:bg-gray-50 flex justify-between items-center">
+                                    <span>Manage Availability</span>
+                                    <i class="fas fa-chevron-right text-gray-400"></i>
+                                </button>
+                                <hr class="my-4">
+                                <button class="w-full text-left p-3 rounded-lg hover:bg-gray-50 flex justify-between items-center text-red-600">
+                                    <span>Delete Account</span>
+                                    <i class="fas fa-chevron-right text-gray-400"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
         
