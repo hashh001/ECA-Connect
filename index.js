@@ -1594,7 +1594,7 @@ const server = http.createServer((req, res) => {
         });
         
         document.getElementById('saveProfile').addEventListener('click', () => {
-            showView('appShell');
+            showView('mainApp');
             showToast('Profile setup complete! Welcome to HobbyConnect', 'success');
         });
         
