@@ -1,0 +1,332 @@
+/* Custom CSS variables based on Tailwind config */
+:root {
+    --primary: #8EE000;
+    --accent: #406600;
+    --dark: #1F2232;
+    --light: #F5F7FA;
+    --muted: #E6EAEF;
+    --neutral: #0F1724;
+}
+
+/* Base body styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F5F7FA;
+    color: #0F1724;
+    transition: all 0.3s ease;
+}
+
+/* Primary button styles */
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    border-radius: 8px;
+    transition: all 0.14s ease-in;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Primary button hover effects */
+.btn-primary:hover {
+    background-color: #7bc800; /* Slightly darker green on hover */
+    transform: scale(0.98); /* Slight shrink effect */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
+}
+
+/* Secondary button styles */
+.btn-secondary {
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    border-radius: 8px;
+    transition: all 0.14s ease-in;
+}
+
+/* Secondary button hover effects */
+.btn-secondary:hover {
+    background-color: rgba(64, 102, 0, 0.05); /* Light green background on hover */
+    transform: scale(0.98); /* Slight shrink effect */
+}
+
+/* Card styles */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(15,18,36,0.06);
+    transition: all 0.3s ease;
+}
+
+/* Chip styles for interests/tags */
+.chip {
+    border-radius: 16px;
+    padding: 4px 12px;
+    border: 1px solid var(--muted);
+    transition: all 0.15s ease;
+}
+
+/* Selected chip styles */
+.chip.selected {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Input focus styles for accessibility and visual feedback */
+input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    transition: outline-color 0.12s ease;
+}
+
+/* Availability chip specific styles */
+.availability-chip {
+    background-color: rgba(142, 224, 0, 0.1); /* Light primary background */
+    color: var(--accent); /* Darker green text */
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* View toggle buttons (e.g., Feed/Map) */
+.view-toggle {
+    color: #6B7280; /* Gray text */
+    transition: all 0.15s ease;
+}
+
+/* Active view toggle button style */
+.view-toggle.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Group card hover effect */
+.group-card:hover {
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* App Shell Specific Styles */
+.header-sticky {
+    position: sticky; /* Make header stick to top */
+    top: 0;
+    backdrop-filter: blur(8px); /* Frosted glass effect */
+    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+}
+
+/* Navigation item styles */
+.nav-item {
+    color: #6B7280; /* Gray text */
+    border-bottom: 3px solid transparent; /* Transparent bottom border */
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Navigation item hover effects */
+.nav-item:hover {
+    color: var(--primary);
+    background-color: rgba(142, 224, 0, 0.05); /* Light primary background */
+}
+
+/* Active navigation item styles */
+.nav-active {
+    color: var(--primary);
+    border-bottom-color: var(--primary); /* Primary colored bottom border */
+    background-color: rgba(142, 224, 0, 0.05); /* Light primary background */
+}
+
+/* Ensures main content panel takes up remaining height */
+.main-content-panel {
+    min-height: calc(100vh - 128px); /* Adjust height based on header and nav heights */
+}
+
+/* Interest filter chip styles */
+.interest-filter-chip {
+    padding: 6px 12px;
+    border: 1px solid var(--muted);
+    border-radius: 20px;
+    background: white;
+    color: #6B7280;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+
+/* Interest filter chip hover effects */
+.interest-filter-chip:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Active interest filter chip styles */
+.interest-filter-chip.active {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+/* Action button styles (e.g., heart, share) */
+.action-btn {
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+}
+
+/* Action button hover effects */
+.action-btn:hover {
+    background-color: rgba(0,0,0,0.05); /* Light gray background on hover */
+}
+
+/* Small button size */
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+/* Search suggestions styling */
+#searchSuggestions {
+    max-height: 300px; /* Limit height and enable scrolling */
+    overflow-y: auto;
+}
+
+/* Individual search suggestion item */
+.search-suggestion {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+/* Search suggestion hover effect */
+.search-suggestion:hover {
+    background-color: var(--light); /* Light background on hover */
+}
+
+/* Grid system for responsive layout */
+.grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.col-span-8 {
+    grid-column: span 8 / span 8;
+}
+
+.col-span-4 {
+    grid-column: span 4 / span 4;
+}
+
+/* Responsive grid adjustments for larger screens */
+@media (min-width: 1280px) {
+    .xl\:col-span-9 {
+        grid-column: span 9 / span 9;
+    }
+
+    .xl\:col-span-3 {
+        grid-column: span 3 / span 3;
+    }
+}
+
+/* Mobile responsiveness: full width columns */
+@media (max-width: 1023px) {
+    .col-span-12 {
+        grid-column: span 12 / span 12;
+    }
+
+    .lg\:col-span-8,
+    .lg\:col-span-4 {
+        grid-column: span 12 / span 12;
+    }
+}
+
+/* Focus styles for accessibility */
+.nav-item:focus,
+.interest-filter-chip:focus,
+.view-toggle:focus,
+.action-btn:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Toast notifications */
+.toast {
+    animation: toastSlideIn 0.3s forwards, toastFadeOut 0.3s forwards 4s;
+    position: relative;
+    padding-right: 2.5rem; /* Space for future close button */
+    z-index: 100; /* Ensure toast is on top */
+}
+
+.toast::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary);
+    animation: toastProgress 4s linear forwards;
+}
+
+@keyframes toastSlideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes toastFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; visibility: hidden; }
+}
+
+@keyframes toastProgress {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+
+/* Progress bar for profile setup */
+.progress-bar {
+    height: 4px;
+    background-color: var(--muted);
+    border-radius: 2px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--primary);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* Fade transition for view changes */
+.view-fade-enter {
+    opacity: 0;
+}
+.view-fade-enter-active {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+.view-fade-exit {
+    opacity: 1;
+}
+.view-fade-exit-active {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Shake animation for input errors */
+.shake {
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+/* Custom styles for Google button to fit layout */
+.g_id_signin {
+    width: 100% !important; /* Ensure it takes full width */
+    display: flex !important; /* Use flexbox for centering */
+    justify-content: center !important; /* Center the button content */
+}
+.g_id_signin > div { /* Target the inner div rendered by Google */
+    width: 100% !important; /* Ensure the inner button also takes full width */
+}
