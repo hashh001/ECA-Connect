@@ -52,28 +52,8 @@ eca-connect/
 
 ---
 
-## How to Run Locally
-1. **Clone the repository**  
-   ```bash
-   git clone https://github.com/yourusername/eca-connect.git
-   cd eca-connect
-Install dependencies (if any)
-(Phase 1A is mostly static, so dependencies are minimal)
 
-Run using a local development server
-
-If using VS Code, install the “Live Server” extension
-
-Right-click index.html → Open with Live Server
-OR run with Python’s built-in HTTP server:
-
-bash
-Copy
-Edit
-python -m http.server 5500
-Visit: http://localhost:5500
-
-2. **Open in Browser**  
+1. **Open in Browser**  
    Open `index.html` in your web browser or use a local server as described below.
 
 Credits
