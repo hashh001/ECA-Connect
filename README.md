@@ -56,10 +56,6 @@ eca-connect/
 1. **Open in Browser**  
    Open `index.html` in your web browser or use a local server as described below.
 
-Credits
-Development: Harsh Garg
-
-UI/UX Design: Harsh garg
 
 APIs: Google Identity Services, Gemini API 
 
