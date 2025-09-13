@@ -1,6 +1,6 @@
 # My Project
-Version: 1.0.1  
-Last Updated: 2025-08-12 10:46:23
+**Version:** 1.0.1  
+**Last Updated:** 2025-08-12 10:46:23  
 
 # ECA Connect – Phase 1A
 
@@ -28,55 +28,55 @@ This repository contains **Phase 1A** of the project, focusing on **onboarding a
   - Header with logo, profile, and logout options  
   - Placeholder tabs for Home, Create Group, Messages, and Profile  
 - **Hello API Screen**  
-  - Simple backend connectivity test
+  - Simple backend connectivity test  
 
 ---
 
 ## Tech Stack
-- **Frontend**: HTML5, Tailwind CSS, JavaScript (Vanilla)
-- **Authentication**: Google Identity Services API
-- **AI Integration (Planned)**: Gemini API
-- **Icons**: Font Awesome
-- **Fonts**: Inter (Google Fonts)
+- **Frontend**: HTML5, Tailwind CSS, JavaScript (Vanilla)  
+- **Authentication**: Google Identity Services API  
+- **AI Integration (Planned)**: Gemini API  
+- **Icons**: Font Awesome  
+- **Fonts**: Inter (Google Fonts)  
 
 ---
 
 ## Folder Structure
+
 eca-connect/
 │
-├── index.html # Main HTML file
-├── css/ # Tailwind + custom styles
-├── js/ # JavaScript logic
-├── images/ # Assets (logos, placeholders)
-└── README.md
+├── index.html 
+├── style.css 
+├── src.js 
+├── update_files.py 
+└── version.txt
+└── README.md 
+
 
 ---
 
 ## How to Run Locally
-1. **Clone the repository**  
+
+1. **Clone the repository**
    ```bash
    git clone https://github.com/yourusername/eca-connect.git
    cd eca-connect
-Install dependencies (if any)
-(Phase 1A is mostly static, so dependencies are minimal)
+   ```
+2. **Run using a local development server**
 
-Run using a local development server
-
-If using VS Code, install the “Live Server” extension
-
+- If using VS Code, install the Live Server extension
 Right-click index.html → Open with Live Server
-OR run with Python’s built-in HTTP server:
 
-bash
-Copy
-Edit
-python -m http.server 5500
-Visit: http://localhost:5500
+- Or run with Python’s built-in HTTP server:
+```bash
+   python -m http.server 5500
+```
+- Then visit: http://localhost:5500
 
-2. **Open in Browser**  
-   Open `index.html` in your web browser or use a local server as described below.
+- Open in Browser: You can also open index.html directly in your web browser.
 
 Credits
+
 Development: Harsh Garg
 
 UI/UX Design: Harsh Garg
