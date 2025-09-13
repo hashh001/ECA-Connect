@@ -76,13 +76,11 @@ Visit: http://localhost:5500
 2. **Open in Browser**  
    Open `index.html` in your web browser or use a local server as described below.
 
-   Credits
-Development: [Your Name]
+Credits
+Development: Harsh Garg
 
-UI/UX Design: [Your Name or Team]
+UI/UX Design: Harsh Garg
 
 APIs: Google Identity Services, Gemini API (planned)
 
 CSS Framework: Tailwind CSS
-## How to Run
-Instructions go here.
